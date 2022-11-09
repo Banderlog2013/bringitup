@@ -1,9 +1,9 @@
-export default class Slider {
-    constructor(page, btns){
-        this.page = document.querySelector(page);
-        this.slides = this.page.children;
-        this.btns = document.querySelectorAll(btns);
-        this.slideIndex = 1;
+import Slider from './slider'
+// создаем глобальный слайдер
+export default class MainSlider extends Slider {
+    constructor(page, btns) {
+        super(page, btns);
+
     }
 
     showSlides(n) {
@@ -52,7 +52,6 @@ export default class Slider {
         } catch(e) {
 
         }
-        
 
         this.btns.forEach(item => {
             item.addEventListener('click', () => {
