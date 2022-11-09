@@ -1,9 +1,8 @@
-import Slider from './slider'
+import Slider from './slider';
 // создаем глобальный слайдер
 export default class MainSlider extends Slider {
-    constructor(page, btns) {
-        super(page, btns);
-
+    constructor(btns) {
+        super(btns);
     }
 
     showSlides(n) {
@@ -17,7 +16,8 @@ export default class MainSlider extends Slider {
 
         try {
             this.hanson.style.opacity = '0';
-            if (n === 3) {
+
+            if (n == 3){
                 this.hanson.classList.add('animated');
                 setTimeout(() => {
                     this.hanson.style.opacity = '1';
@@ -26,16 +26,14 @@ export default class MainSlider extends Slider {
             } else {
                 this.hanson.classList.remove('slideInUp');
             }
-        } catch(e) {
-
-        }
+        }catch(e){}
 
         // Преобразование html коллекции в массив перебор и скрывание слайдов
         Array.from(this.slides).forEach(slide => {
             slide.style.display = 'none';
         });
 
-        // this.slides.forEach(slide => {
+        // this.slides.forEach(slide => { // forEach на псевдомассиве не работает. Необходимо преодразовать псевдомассив в массив
         //     slide.style.display = "none";
         // });
 
@@ -49,9 +47,7 @@ export default class MainSlider extends Slider {
     render() {
         try {
             this.hanson = document.querySelector('.hanson');
-        } catch(e) {
-
-        }
+        } catch(e){}
 
         this.btns.forEach(item => {
             item.addEventListener('click', () => {
