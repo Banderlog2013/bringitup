@@ -5,7 +5,7 @@ export default class VideoPlayer {
         this.close = this.overlay.querySelector('.close');
         this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
     }
-    
+
     bindTriggers() {
         this.btns.forEach((btn, i) => {
             try {
@@ -19,7 +19,7 @@ export default class VideoPlayer {
             btn.addEventListener('click', () => {
                 if (!btn.closest('.module__video-item') || btn.closest('.module__video-item').getAttribute('data-disabled') !== 'true') {
                     this.activeBtn = btn;
-                    
+
                     if (document.querySelector('iframe#frame')) {
                         this.overlay.style.display = 'flex';
                         if (this.path !== btn.getAttribute('data-url')) {
@@ -28,10 +28,10 @@ export default class VideoPlayer {
                         }
                     } else {
                         this.path = btn.getAttribute('data-url');
-
+    
                         this.createPlayer(this.path);
                     }
-                } 
+                }
             });
         });
     }
@@ -42,7 +42,7 @@ export default class VideoPlayer {
             this.player.stopVideo();
         });
     }
-    
+
     createPlayer(url) {
         this.player = new YT.Player('frame', {
             height: '100%',
@@ -60,7 +60,7 @@ export default class VideoPlayer {
         try {
             const blockedElem = this.activeBtn.closest('.module__video-item').nextElementSibling;
             const playBtn = this.activeBtn.querySelector('svg').cloneNode(true);
-
+    
             if (state.data === 0) {
                 if (blockedElem.querySelector('.play__circle').classList.contains('closed')) {
                     blockedElem.querySelector('.play__circle').classList.remove('closed');
@@ -70,7 +70,7 @@ export default class VideoPlayer {
                     blockedElem.querySelector('.play__text').classList.remove('attention');
                     blockedElem.style.opacity = 1;
                     blockedElem.style.filter = 'none';
-
+    
                     blockedElem.setAttribute('data-disabled', 'false');
                 }
             }
@@ -84,9 +84,9 @@ export default class VideoPlayer {
             tag.src = "https://www.youtube.com/iframe_api";
             const firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+    
             this.bindTriggers();
             this.bindCloseBtn();
         }
     }
-} 
+}
